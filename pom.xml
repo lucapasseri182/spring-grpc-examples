@@ -10,7 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.demo.grpc</groupId>
-	<artifactId>grpc_demo</artifactId>
+	<artifactId>spring-grpc-examples</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>grpc_demo</name>
 	<description>Demo project for Spring Boot</description>

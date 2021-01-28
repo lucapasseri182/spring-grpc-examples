@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.demo.grpc</groupId>
-        <artifactId>grpc_demo</artifactId>
+        <artifactId>spring-grpc-examples</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.demo.grpc.ping_pong_service</groupId>
-    <artifactId>ping_pong_service</artifactId>
+    <groupId>com.demo.grpc.ping-pong-service</groupId>
+    <artifactId>ping-pong-service</artifactId>
 
 
 </project>

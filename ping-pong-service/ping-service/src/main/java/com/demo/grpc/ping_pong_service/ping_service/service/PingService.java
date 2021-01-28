@@ -17,11 +17,13 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PreDestroy;
 import java.util.Collections;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 @Service
 public class PingService {
 
-    private static final double MAX_NUM = 1000;
+    private static final int MAX_NUM = 1000;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PingService.class);
 
@@ -43,9 +45,9 @@ public class PingService {
         PingPongServiceGrpc.PingPongServiceBlockingStub stub = PingPongServiceGrpc.newBlockingStub(channel);
         for (int i=0; i < MAX_NUM; i++) {
             PongResponse pongResponse = stub.pingPong(PingRequest.newBuilder()
-                    .setPing("ping")
+                    .setPing("ping" + getRandomInt())
                     .build());
-            pongResponse.getPong();
+            String pong = pongResponse.getPong();
         }
 
         sample.stop(meterRegistry.timer("sample", Collections.singletonList(new ImmutableTag("method", "gRPC"))));
@@ -57,13 +59,17 @@ public class PingService {
         Timer.Sample sample = Timer.start();
         for (int i=0; i < MAX_NUM; i++) {
             PongRestResponse adderResponse = pongServiceRestClient.pingPong(PingRestRequest.builder()
-                    .ping("ping")
+                    .ping("ping" + getRandomInt())
                     .build());
             String pong = adderResponse.getPong();
         }
 
         sample.stop(meterRegistry.timer("sample", Collections.singletonList(new ImmutableTag("method", "HTTP"))));
         LOGGER.info("stop pingPong with HTTP");
+    }
+
+    private int getRandomInt() {
+        return (int)(Math.random() * Integer.MAX_VALUE);
     }
 
     @PreDestroy

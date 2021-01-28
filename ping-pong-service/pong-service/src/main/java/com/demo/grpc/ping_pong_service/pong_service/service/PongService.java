@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class PongService {
 
     public String pingPong(String ping) {
-        return "ping".equals(ping) ? "pong" : "not pong";
+        return ping.replace("ping", "pong");
     }
 
 }

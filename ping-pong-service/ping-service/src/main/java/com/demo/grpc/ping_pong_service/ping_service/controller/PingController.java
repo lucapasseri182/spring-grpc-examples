@@ -13,10 +13,16 @@ public class PingController {
         this.pingService = pingService;
     }
 
-    @PostMapping("/start")
-    public void start() {
-        pingService.sendPingWithGRPC();
-        pingService.sendPingWithHttp();
+    @PostMapping("/start/standard")
+    public void startStandard() {
+        pingService.sendStandardPingsWithGRPC();
+        pingService.sendStandardPingsWithHttp();
+    }
+
+    @PostMapping("/start/massive")
+    public void startMassive() {
+        pingService.sendMassivePingsWithGRPC();
+        pingService.sendMassivePingsWithHttp();
     }
 
 }

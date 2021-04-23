@@ -40,8 +40,6 @@ public class PingService {
         this.pongServiceRestClient = pongServiceRestClient;
         this.channel = ManagedChannelBuilder.forAddress("localhost", 8092)
                 .usePlaintext()
-                .maxInboundMessageSize(1000*1024*1024)
-                .maxInboundMetadataSize(1000*1024*1024)
                 .build();
     }
 
@@ -49,7 +47,7 @@ public class PingService {
         LOGGER.info("start standard pingPong with gRPC");
         for (int j = 0; j < EPOCHS; j++) {
             Timer.Sample sample = Timer.start();
-            PingPongServiceGrpc.PingPongServiceBlockingStub stub = PingPongServiceGrpc.newBlockingStub(channel).withMaxOutboundMessageSize(1000*1024*1024);
+            PingPongServiceGrpc.PingPongServiceBlockingStub stub = PingPongServiceGrpc.newBlockingStub(channel);
             for (int i = 0; i < STANDARD_ITERATIONS; i++) {
                 PongResponse pongResponse = stub.pingPong(PingRequest.newBuilder()
                         .setPing("ping" + getRandomInt())
